@@ -1,0 +1,14 @@
+{
+    "extends": ["stylelint-config-standard-scss"],
+    "plugins": ["stylelint-scss", "stylelint-order"],
+    "overrides": [
+        { "files": ["**/*.scss"], "customSyntax": "postcss-scss" }
+    ],
+    "rules": {
+        "order/properties-order": [
+        ["position","inset","display","flex","gap","width","height","margin","padding","border","border-radius","background","box-shadow","color","font-size","line-height","text-align","opacity","transform","transition"],
+        { "unspecified": "bottomAlphabetical" }
+        ],
+        "selector-class-pattern": "^[a-z]([a-z0-9]*)(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$"
+    }
+}

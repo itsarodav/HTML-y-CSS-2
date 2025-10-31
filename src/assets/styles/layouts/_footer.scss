@@ -1,0 +1,86 @@
+@use "../variables";
+
+.vlc-footer {
+    color: variables.$vlc-base-light;
+    font-size: 1rem;
+    line-height: 1.5;
+    background-color: #242424;
+
+    &__inner {
+        display: flex;
+        gap: 0.5rem;
+        padding: 1rem;
+        text-align: center;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    &__link {
+        color: inherit;
+        transition: color .2s ease, border-color .2s ease;
+        border-bottom: 1px solid transparent;
+        font-weight: 600;
+        text-decoration: none;
+
+        &:hover,
+        &:focus-visible {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        }
+    }
+
+    &__dot {
+        display: none;
+        opacity: .6;
+    }
+
+    &__legal { 
+        margin: 0; 
+    }
+
+    &__org { 
+        font-weight: 500; 
+    }
+
+    // Tablet
+
+    @media (min-width: variables.$bp-tablet) {
+        font-size: 1rem;
+
+        &__inner {
+        gap: .5rem 1rem;
+        padding: 1rem;
+        }
+
+        &__dot {
+        display: inline;
+        margin-inline: .5rem;
+        }
+    }
+
+    // Desktop
+
+    @media (min-width: variables.$bp-desktop) {
+        &__inner {
+        padding: 1rem 0;
+        text-align: left;
+        justify-content: 2em;
+        margin-inline: auto;
+        max-width: 70rem;
+        }
+
+        &__dot { 
+            opacity: 1
+        }
+    }
+
+    &--compact {
+        @media (width >= 0) {
+        .uoc-footer__inner {
+            gap: .25rem .5rem; padding: .5rem .75rem; }
+
+            font-size: 1rem;
+        }
+    }
+}

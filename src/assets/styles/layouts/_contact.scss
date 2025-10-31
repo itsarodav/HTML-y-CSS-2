@@ -1,0 +1,216 @@
+@use "../variables";
+
+    .contact {
+    background: variables.$vlc-brand-color;
+    color: variables.$vlc-base-light;
+
+    .container { 
+        width: min(1120px, 100% - 2rem); 
+        margin-inline: auto; 
+    }
+
+    // Contenido superior
+
+    &__top {
+        display: grid;
+        gap: 2.5rem;
+        padding: 2rem 0;
+        grid-template-columns: 1fr;
+    }
+
+    &__lead { 
+        max-width: 48ch;
+    }
+
+    &__title {
+        margin: 0 0 2rem;
+        font-size: 2rem;
+        line-height: 1.4em;
+    }
+
+    &__form { 
+        display: grid; 
+        gap: 1em; 
+    }
+
+    &__label {
+        display: inline-flex; 
+        gap: 0.5rem;
+        color: variables.$vlc-base-light;
+        font-size: 1rem; 
+        align-items: center;
+    }
+
+    &__bullet { 
+        color: #7dd3fc; 
+        font-weight: 700; 
+    }
+
+    &__input-group {
+        display: flex; 
+        border: 1px solid variables.$vlc-base-dark;
+        border-radius: variables.$vlc-border-radius;
+        background: #fff; 
+        align-items: stretch;
+        overflow: hidden;
+    }
+
+    &__input {
+        flex: 1 1 auto;
+        padding: 1rem; 
+        border: 0; 
+        border-radius: variables.$vlc-border-radius;
+        font-size: 1rem; 
+        min-width: 0; 
+        outline: none;
+    }
+
+    &__send {
+        margin: 0.2rem; 
+        padding: 1rem 1.5rem; 
+        border: 0;
+        border-radius: variables.$vlc-border-radius;
+        background: variables.$vlc-accent-1; 
+        color: variables.$vlc-base-light; 
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    &__send:hover { 
+        filter: brightness(1.05); 
+    }
+
+    &__agree {
+        display: inline-flex; 
+        gap: .5rem; 
+        color: variables.$vlc-base-light;
+        font-size: .95rem; 
+        align-items: center;
+    }
+
+    &__checkbox { 
+        width: 1rem; 
+        height: 1rem; 
+    }
+
+    &__link { 
+        color: inherit; 
+        text-decoration: underline; 
+        text-underline-offset: 2px; 
+    }
+
+    // Marca vlc
+
+    &__brand { 
+        justify-self: start; 
+    }
+
+    &__logo { 
+        display: block;
+        width: clamp(120px, 20vw, 220px); 
+        height: auto; 
+    }
+
+    &__tagline {
+        margin: 1rem 0 0; 
+        line-height: 1.5; 
+        font-weight: 600; 
+        letter-spacing: 0;
+    }
+
+    // Divisores
+
+    &__divider { 
+        height: 1px;
+        margin: 1.5rem 0;
+        border: 0; 
+        background: variables.$vlc-base-light;
+    }
+
+    // Final
+
+    &__bottom {
+        display: grid; 
+        gap: 1rem; 
+        align-items: center;
+        grid-template-columns: 1fr;
+        padding-bottom: 1rem;
+    }
+
+    &__email {
+        display: inline-flex; 
+        gap: .5rem;
+        color: variables.$vlc-base-light; 
+        align-items: center; 
+        text-decoration: none; 
+    }
+
+    &__dot { 
+        color: variables.$vlc-accent-1; 
+        font-size: 1.2rem; 
+        line-height: 1; 
+    }
+
+    &__social { 
+        display: inline-flex;
+        gap: 1em;
+    }
+
+    &__social-link { 
+        display: grid;
+        width: 40px; 
+        height: 40px;
+        border: variables.$vlc-border; 
+        border-radius: variables.$vlc-border-radius; 
+        background: transparent;
+        color: variables.$vlc-base-light; 
+        place-items: center;
+        text-decoration: none;
+    }
+
+    &__privacy { 
+        color: variables.$vlc-base-light; 
+        justify-self: start; 
+        text-decoration: none; 
+    }
+
+    &__privacy:hover { 
+        text-decoration: underline; 
+        text-underline-offset: 2px; 
+    }
+
+    // Tablet
+
+    @media (min-width: variables.$bp-tablet) {
+        &__top { 
+            align-items: start; 
+            grid-template-columns: 1fr 1fr; 
+        }
+
+        &__brand { 
+            text-align: right; 
+            justify-self: end; 
+        }
+
+        &__bottom {
+            align-items: center;
+            grid-template-columns: 1fr auto auto;
+        }
+
+        &__privacy { 
+            justify-self: end; 
+        }
+    }
+
+    // Desktop
+
+    @media (min-width: variables.$bp-desktop) {
+        &__top { 
+            padding: 3rem 0 2rem; 
+        }
+
+        &__title { 
+            font-size: 2.5rem; 
+        }
+    }
+}

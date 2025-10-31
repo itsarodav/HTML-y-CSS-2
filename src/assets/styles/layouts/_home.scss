@@ -1,59 +1,612 @@
+@use "sass:color";
 @use "../variables";
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-body {
+main{
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+img { 
+    display: block; 
+    height: auto; 
+    max-width: 100%; 
+  }
+
+.sr-only { 
+    position: absolute; 
+    width:1px; 
+    height:1px; 
+    margin:-1px; 
+    padding:0; 
+    border:0;
+    clip-path: inset(0);
+    overflow:hidden; 
+  }
+
+body {
+  display: flex;
   margin: 0;
-  padding: 2rem;
-  font-family: variables.$font-family-sans-serif;
+  padding: 0;
   font-size: 16px;
   line-height: 24px;
-  background-color: variables.$uoc-bg;
-  color: variables.$uoc-corporate;
+  background-color: variables.$vlc-bg;
+  flex-direction: column;
+  font-family: variables.$font-family-sans-serif;
+  min-height: 100vh;
 }
 
-.uoc-container {
-  max-width: 800px;
-  margin: auto;
-  padding: 2rem;
-  border-radius: 2rem;
-  text-align: center;
-  background-color: #fff;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+.container { 
+  width: min(1100px, 100% - 2rem); 
+  margin-inline: auto; 
 }
 
-.uoc-logo {
+.skip-link{
+  position: absolute; 
+  padding: .75rem 1rem;
+  background: variables.$vlc-brand-color; 
+  color: variables.$vlc-base-light; 
+  left: -9999px; 
+  top: 0; 
+  z-index: 10000;
+
+  &:focus { 
+    border-radius: .5rem;
+    left: .5rem; 
+    top: .5rem; 
+  }
+}
+
+  // El header va encima del hero
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  display: flex;
+  height: variables.$header-h;
+  background: transparent;
+  color: variables.$vlc-base-light;
+  transition: background-color .2s ease;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 1rem;
+  z-index: 100;
+
+  &--solid { 
+    background-color: variables.$vlc-brand-color; 
+  }
+
+  &__toggle {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    align-items: center;
+    cursor: pointer;
+    justify-content: center;
+
+    i {
+    font-size: 32px;
+    line-height: 1;
+    }
+  }
+
+  &__nav { 
+      display: none;
+  }
+
+  &--open &__nav {
+    position: fixed;
+    inset: variables.$header-h 0 auto 0;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 6rem;
+    background: rgb(33 33 34 / 65%);
+    backdrop-filter: blur(8px);
+  }
+
+  &__brand { 
+    display: inline-flex; 
+    gap: 0.5rem; 
+    align-items: center; 
+  }
+
+  &__logo { 
+    width: 80px; 
+    height: 40px; 
+  }
+}
+
+.site-header__nav > ul,
+.site-header__nav > .primary-nav {
+  display: flex;
+  gap: 2.5rem;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  flex-direction: column;
+  list-style: none;
+}
+
+  // enlaces y estados
+
+.site-header__nav a,
+.primary-nav__link {
+  color: inherit;
+  font-size: 2rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: variables.$vlc-accent-2; 
+    text-decoration: underline;
+    text-decoration-style: wavy;
+  }
+}
+
+.hero {
+  position: relative;
+  display: grid;
+  align-items: center;
+  isolation: isolate;
+  min-height: 100svh;
+
+  &__art {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: -1;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }  
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgb(0 0 0 / 35%) 0%,
+      rgb(0 0 0 / 10%) 80%,
+      rgb(0 0 0 / 55%) 100%
+    );
+    content: "";
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &__inner { 
+    position: relative; 
+    z-index: 1; 
+  }
+
+  &__content {
+    display: grid;
+    gap: 1rem;
+    text-align: center;
+    margin-inline: auto;
+    max-width: 1200px;
+    padding-top: variables.$header-h;
+
+  }
+
+  &__title {
+    color: variables.$vlc-base-light;
+    font-size: 3rem;
+    line-height: 1.2;
+    font-weight: 800;
+  }
+
+  &__lead {
+    color: variables.$vlc-base-light;
+    font-size: 1.2rem;
+    line-height:1.5;
+    font-weight: 600;
+  }
+
+  &__actions {
+    margin-top: 0.8rem;
+  }
+
+  .btn {
+  display: inline-flex; 
+  gap: 0.5em;
+  padding: 1em 2em; 
+  border-radius: 4em;
+  font-size: 1.2rem;
+  line-height: 1.5; 
+  align-items: center;
+  font-weight: 600; 
+  text-decoration: none;
+
+  &--primary {
+    color:variables.$vlc-brand-color;
+    background-color: variables.$vlc-base-light;
+    }
+  }
+
+}
+
+  .about {
+  padding: 2rem 0;
+  background: variables.$vlc-base-light;
+  color: variables.$vlc-base-dark;
+
+  &__inner {
+    display: grid;
+    gap: 1.25rem;
+    align-items: stretch;
+    grid-template-columns: 1fr;
+  }
+
+  &__content {
+    max-width: 60ch;
+  }
+
+  &__title {
+    margin: 0 0 .75rem;
+    color: variables.$vlc-brand-color;
+    font-size: 2rem;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  &__paragraph {
+    margin: 0 0 .9rem;
+    color:  variables.$vlc-base-dark;
+  }
+
+  &__media {
+    margin: 0;
+    border-radius: 1rem;
+    background: #fff;
+    min-height: 8rem;
+    overflow: hidden;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+}
+
+// Secciones
+
+.vlc-section {
+  display: flex;
+  padding: variables.$vlc-space-4 variables.$vlc-space-3;
+  align-items: stretch;
+  background-color: variables.$vlc-base-light;
+  flex-direction: column;
+  justify-content: center;
+
+  &__header {
+    margin-bottom: variables.$vlc-space-3;
+  }
+
+  &__title {
+    margin: 0 0 variables.$vlc-brand-color 0;
+    color: variables.$vlc-brand-color;
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  &__subtitle {
+    margin: 0;
+    color: variables.$vlc-neutral-2;
+    font-size: 1rem; // 16px aprox;
+  }
+}
+
+
+// ------------------------------
+// Listado de tarjetas (flex, mobile-first)
+// ------------------------------
+.card-list {
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+  align-items: stretch;
+  flex-direction: column;
+  list-style: none;
+}
+
+.card-list__item {
+  display: flex;
+  width: 100%;
+
+  // Sin estilos extra para mantenerlo simple
+  background-color: transparent;
+
+}
+
+// ------------------------------
+// Tarjeta
+// ------------------------------
+.card {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border: 1px solid color.mix(variables.$vlc-base-dark, variables.$vlc-base-light, 10%);
+  border-radius: variables.$vlc-radius-md;
+  background: variables.$vlc-base-light;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 5%);
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.card__media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.card__media > img {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 1.5rem;
-  max-width: 200px;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
 
-  @media (min-width: variables.$mqMinWidth) {
-    max-width: none;
+.card__body {
+  display: flex;
+  flex: 1;
+  gap: variables.$vlc-space-1;
+  padding: variables.$vlc-space-3;
+  flex-direction: column;
+}
+
+.card__title {
+  margin: 0;
+  color: variables.$vlc-base-dark;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.card__subtitle {
+  margin: 0;
+  color: variables.$vlc-neutral-2;
+  font-size: 1rem;
+}
+
+.card__text {
+  margin: 0;
+  color: variables.$vlc-neutral-2;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.card__button {
+  margin: 0 variables.$vlc-space-3 variables.$vlc-space-3;
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.button {
+  display: inline-flex;
+  padding: variables.$vlc-space-2 variables.$vlc-space-3;
+  border-radius: variables.$vlc-border-radius;
+  background: variables.$vlc-brand-color;
+  color: variables.$vlc-base-light;
+  font-size: 1rem;
+  line-height: 1;
+  transition: transform .06s ease, opacity .2s ease;
+  align-items: center;
+  cursor: pointer;
+  justify-content: center;
+  text-decoration: none;
+
+  &:hover { 
+    opacity: 0.9; 
   }
-}
 
-.uoc-title {
-  font-family: variables.$font-family-serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: variables.$uoc-corporate;
-
-  @media (min-width: variables.$mqMinWidth) {
-    font-size: 36px;
+  &:active { 
+    transform: translateY(1px); 
   }
+
 }
 
-.uoc-footer {
-  margin-top: 1.5rem;
-  font-size: 0.75rem;
-  text-align: center;
-}
+  // TABLET
+
+  @media (min-width: variables.$vlc-bp-tablet) {
+    .site-header {
+      justify-content: space-between;
+
+      &__toggle { 
+        display: none; 
+      } 
+
+      &__nav,
+      &--open &__nav {
+        position: static;
+        display: block;
+        padding: 0;
+        background: none;
+        backdrop-filter: none;
+      }
+    }
+
+    .primary-nav {
+      gap: 2rem;
+      align-items: center;
+      flex-direction: row;
+    }
+
+    .site-header__nav > ul,
+    .site-header__nav > .primary-nav {
+      gap: 2.2rem;
+      align-items: center;
+      flex-direction: row;
+      justify-content: right;
+    }
+
+    .site-header__nav a,
+    .primary-nav__link {
+      font-size: 1.4rem;
+    }
+
+
+    .site-header--solid {
+      background-color: variables.$vlc-brand-color;
+    }
+
+    .hero {
+    padding-block: 4rem 3rem;
+
+    &__content { 
+      gap: 1.25rem; 
+    }
+
+    &__title   { 
+      font-size: 5rem; 
+      line-height: 1.2; 
+    }
+
+    &__lead{ 
+      font-size: 1.5rem;
+      line-height: 1.5; 
+    }
+
+    .btn { 
+      padding: 1em 1.5em; 
+      font-size: 1.2rem; 
+    }
+  }
+
+    .about {
+      padding: 2em 4em;
+    }
+
+    .about__inner {
+      gap: 2rem;
+      grid-template-columns: 1.1fr 0.6fr;
+    }
+
+    .vlc-section__media {
+      min-height: 5rem;
+    }
+
+    .card-list {
+      gap: 2rem;
+      align-items: stretch;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+    }
+
+    .card-list__item {
+      display: flex;
+      max-width: 100%;
+      min-width: 280px;
+    }
+  }
+
+  // DESKTOP
+
+  @media (min-width: variables.$vlc-bp-desktop) {
+    .site-header {
+      padding-inline: 2rem;
+      
+      &__logo { 
+        width: 90px; 
+        height: 44px; 
+      }
+    }
+
+    .site-header__nav{
+      display: flex;
+      width:100%;
+      justify-content: end;
+    }
+
+    .site-header__nav a,
+    .primary-nav__link {
+      display: flex;
+      font-size: 1.2rem;
+      flex-direction: row;
+    }
+
+    .primary-nav {
+      gap: 2rem;
+      align-items: center;
+      flex-direction: row;
+    }
+
+    .hero {
+    padding-block: 5rem 4rem;
+
+      &__title { 
+        font-size: 4.8rem; 
+        line-height: 1.2; 
+      }
+
+      &__lead { 
+        font-size: 1.5rem;
+        line-height: 1.8;
+      }
+
+      .btn { 
+        padding: 1em 2em; 
+        font-size: 1.4rem; 
+      }
+    }
+
+    .about__inner{
+      max-width: variables.$vlc-bp-desktop;
+    }
+
+    .vlc-section {
+      padding: 4rem 0;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .vlc-section > * {
+    width: min(1280px, 100% - 2rem);
+    
+  }
+
+    .vlc-section__inner {
+      gap: 2.5rem;
+      grid-template-columns: 1fr 0.6fr;
+    }
+
+    .vlc-section__media {
+      min-height: 8rem;
+    }
+
+    .card-list {
+      gap: 2rem;
+      align-items: stretch;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+    }
+
+    .card-list__item {
+      flex: 1 1 320px;
+      max-width: 100%;
+      min-width: 280px;
+    }
+  }

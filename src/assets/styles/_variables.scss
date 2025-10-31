@@ -1,12 +1,44 @@
 @use "sass:color";
 
-$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-  "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+// Fuentes
+
+$font-family-sans-serif: -apple-system, blinkmacsystemfont, "Segoe UI", roboto,
+  "Helvetica Neue", arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
   "Segoe UI Symbol";
 $font-family-serif: "Georgia", "Times New Roman", serif;
 
-$uoc-corporate: #000078;
-$uoc-masterbrand: #73edff;
-$uoc-bg: color.scale($uoc-masterbrand, $lightness: 70%);
+// Colores
 
-$mqMinWidth: 420px;
+$vlc-base-dark: #0D1321;
+$vlc-base-light: #fefefe;
+$vlc-neutral-1: #80858B;
+$vlc-neutral-2: #525d6b;
+$vlc-brand-color: #00509D;
+$vlc-secondary-color: #3A8EE3;
+$vlc-accent-1: #0EAD69;
+$vlc-accent-2: #F37748;
+$vlc-bg: $vlc-base-light; // Variable semántica
+
+// Bordes
+
+$vlc-border: 2px solid $vlc-base-light;
+
+// Border radius
+
+$vlc-border-radius: 9999px;
+$vlc-radius-md: 12px;
+
+// Espaciados
+
+$header-h: 64px;
+$vlc-space-1: 8px;
+$vlc-space-2: 12px;
+$vlc-space-3: 16px;
+$vlc-space-4: 24px;
+
+// Dispositivos para responsive
+
+$vlc-bp-tablet: 48rem;
+$vlc-bp-desktop: 75rem;
+$bp-tablet: 48rem;
+$bp-desktop: 64rem;
