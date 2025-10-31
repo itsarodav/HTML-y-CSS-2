@@ -1,0 +1,5 @@
+@use "../variables";
+
+@function rem($px, $base: 16) {
+  @return calc($px / $base) * 1rem;
+}
