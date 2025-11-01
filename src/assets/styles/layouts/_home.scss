@@ -280,7 +280,6 @@ body {
 
   &__media {
     margin: 0;
-    border-radius: 1rem;
     background: #fff;
     min-height: 8rem;
     overflow: hidden;
@@ -289,10 +288,19 @@ body {
   &__img {
     display: block;
     width: 100%;
-    height: 100%;
+    height: 96%;
+    border-radius: variables.$vlc-radius-md;
     object-fit: cover;
     object-position: center;
   }
+
+  &__caption {
+  color: variables.$vlc-base-dark;
+  font-size: f.rem(14);
+  line-height: 1.4;
+  text-align: center;
+  margin-block-start: 0.5rem;
+}
 
 }
 
