@@ -328,7 +328,7 @@ body {
   &__subtitle {
     margin: 0;
     color: variables.$vlc-neutral-2;
-    font-size: 1rem; // 16px aprox;
+    font-size: 1rem;
   }
 }
 
@@ -618,6 +618,6 @@ body {
     .card-list__item {
       flex: 1 1 320px;
       max-width: 100%;
-      min-width: 280px;
+      min-width: 260px;
     }
   }
